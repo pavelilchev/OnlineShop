@@ -1,0 +1,22 @@
+﻿@model IEnumerable<OnlineShop.Models.CartProduct>
+
+@{
+    ViewBag.Title = "MyCart";
+}
+
+<h2>MyCart</h2>
+
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="row">
+            @Html.DisplayForModel()
+        </div>
+    </div>
+    <div class="col-md-3">
+        <p>Total Products: @ViewData["productsCount"]</p>
+        <p>Total Price: @ViewData["productsPrice"]</p>
+        <a href="">Finalize purchase</a>
+    </div>
+</div>
+

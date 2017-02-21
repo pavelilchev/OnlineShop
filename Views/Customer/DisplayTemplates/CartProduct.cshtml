@@ -1,0 +1,10 @@
+﻿@model OnlineShop.Models.CartProduct
+
+<div class="col-sm-4 single-product">
+    <img src="@($"data:image/gif;base64,{Convert.ToBase64String(Model.Product.Picture)}")" />
+    <p>@Model.Product.Name</p>
+    <p>Quantity: @Model.Quantity</p>
+    <p>Price: $@Model.Product.Price</p>
+
+    @Html.ActionLink("Remove from cart", "RemoveFromCart", "Customer", new { cartId = @Model.Cart.Id, @cartProductId = Model.Id }, new { @class = "" })
+</div>

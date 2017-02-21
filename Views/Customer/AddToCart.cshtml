@@ -1,0 +1,52 @@
+﻿@model OnlineShop.Models.ViewModels.CartProductViewModel
+
+@using (Html.BeginForm("AddToCart", "Customer", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <div class="col-md-10 col-md-offset-1">
+                    <img src="@($"data:image/gif;base64,{Convert.ToBase64String(Model.Picture)}")" class="product-pic" />
+                </div>
+            </div>
+            @Html.HiddenFor(model => model.Id)
+            <div class="form-group">
+                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="form-control">
+                        @Html.DisplayFor(model => model.Name)
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="form-control">
+                        @Html.DisplayFor(model => model.Price)
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Quantity, new SelectList(Enumerable.Range(1, Math.Min(Model.Quantity, 20))), new { @class = "quantity-dropdown" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="Add To Cart" class="" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="row">
+    <div class="col-sm-4">
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>

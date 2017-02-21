@@ -1,0 +1,12 @@
+﻿@model IEnumerable<OnlineShop.Models.Product>
+
+<div class="row">
+    <div class="col-sm-4">
+        @Html.ActionLink("Add new Product", "Create", "ControlPanel", new { @class = "create-link" })
+    </div>
+</div>
+
+<div class="row">
+    @Html.DisplayForModel()
+</div>
+

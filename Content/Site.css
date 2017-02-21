@@ -1,0 +1,74 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+
+.site-logo {
+    display: inline-block;
+    margin: 10px 0;
+}
+
+.create-link {
+    display: block;
+    margin: 20px;
+    padding: 10px;
+    background: blue;
+    color: #FFF;
+    border: 1px solid #000;
+    border-radius: 3px;
+    text-decoration: none;
+    text-align: center;
+}
+
+    .create-link:hover {
+        opacity: 0.8;
+        color: #FFF;
+        text-decoration: none;
+    }
+
+.single-product {
+    border: 1px solid #CCC;
+    padding: 10px;
+    margin: 10px;
+    text-align: center;
+}
+
+    .single-product img, .product-pic {
+        width: 150px;
+    }
+
+.add-to-cart-link {
+    text-align: center;
+    display: block;
+    padding: 10px;
+    background: url('Images/cart.png') no-repeat 50px;
+    background-size: 40px 40px;
+}
+
+.quantity-dropdown {
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    height: 34px;
+    padding: 6px 12px;
+}

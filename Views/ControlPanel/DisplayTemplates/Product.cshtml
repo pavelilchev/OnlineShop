@@ -1,0 +1,10 @@
+﻿@model OnlineShop.Models.Product
+
+<div class="col-sm-3 single-product">
+    <img src="@($"data:image/gif;base64,{Convert.ToBase64String(Model.Picture)}")" /> 
+    <p>@Model.Name</p>
+    <p>Quantity: @Model.Quantity</p>
+    <p>Price: $@Model.Price</p>
+    @Html.ActionLink("Edit", "Edit", "ControlPanel", new { id = @Model.Id }, null)
+    @Html.ActionLink("Delete", "Delete", "ControlPanel", new { id = @Model.Id }, null)
+</div>
