@@ -1,16 +1,15 @@
 ﻿namespace OnlineShop.Controllers
 {
     using System;
-    using System.Collections.Generic;
+    using System.Data.Entity.Validation;
     using System.Linq;
     using System.Net;
     using System.Web.Mvc;
-    using System.Web.Security;
     using Microsoft.AspNet.Identity;
     using Models;
     using Models.ViewModels;
 
-    public class CustomerController : BaseController
+    public class CartController : BaseController
     {
         public ActionResult Index()
         {
@@ -59,7 +58,7 @@
             }
 
             int quantity = cartProduct.Quantity;
-            if (quantity> 0 || quantity <= product.Quantity)
+            if (quantity > 0 || quantity <= product.Quantity)
             {
                 string currentUserId = this.User.Identity.GetUserId();
                 Cart cart = this.Data.Carts.FirstOrDefault(x => x.User.Id == currentUserId && x.IsActive);
@@ -79,7 +78,7 @@
                     Product = product,
                     Quantity = quantity
                 };
-                
+
                 cart.Products.Add(newCartProduct);
 
                 this.Data.SaveChanges();
@@ -115,7 +114,7 @@
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            
+
             var product = this.Data.CartProducts.Find(cartProductId);
             if (product == null)
             {
@@ -126,6 +125,32 @@
             this.Data.SaveChanges();
 
             return this.RedirectToAction("MyCart");
+        }
+
+        [Authorize]
+        public ActionResult Finalizepurchase()
+        {
+            string currentUserId = this.User.Identity.GetUserId();
+            Cart cart = this.Data.Carts.FirstOrDefault(x => x.User.Id == currentUserId && x.IsActive);
+            if (cart == null)
+            {
+                return this.HttpNotFound();
+            }
+
+            foreach (var product in cart.Products)
+            {
+                if (product.Quantity > product.Product.Quantity)
+                {
+                    return this.RedirectToAction("MyCart");
+                }
+
+                product.Product.Quantity -= product.Quantity;
+            }
+
+            cart.IsActive = false;
+            this.Data.SaveChanges();
+
+            return this.View();
         }
     }
 }

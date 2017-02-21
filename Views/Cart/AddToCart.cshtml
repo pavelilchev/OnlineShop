@@ -1,6 +1,6 @@
 ﻿@model OnlineShop.Models.ViewModels.CartProductViewModel
 
-@using (Html.BeginForm("AddToCart", "Customer", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("AddToCart", "Cart", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 

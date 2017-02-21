@@ -14,7 +14,7 @@
         public int Id { get; set; }
 
         [Required]
-        public User User { get; set; }
+        public virtual User User { get; set; }
 
         [Required]
         public bool IsActive { get; set; }

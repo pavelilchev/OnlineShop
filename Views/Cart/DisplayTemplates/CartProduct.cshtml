@@ -6,5 +6,5 @@
     <p>Quantity: @Model.Quantity</p>
     <p>Price: $@Model.Product.Price</p>
 
-    @Html.ActionLink("Remove from cart", "RemoveFromCart", "Customer", new { cartId = @Model.Cart.Id, @cartProductId = Model.Id }, new { @class = "" })
+    @Html.ActionLink("Remove from cart", "RemoveFromCart", "Cart", new { cartId = @Model.Cart.Id, @cartProductId = Model.Id }, new { @class = "" })
 </div>

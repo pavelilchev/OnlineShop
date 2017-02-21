@@ -171,7 +171,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ControlPanelController.cs" />
-    <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -258,12 +258,13 @@
     <Content Include="Views\ControlPanel\Edit.cshtml" />
     <Content Include="Views\ControlPanel\Index.cshtml" />
     <Content Include="Views\ControlPanel\DisplayTemplates\Product.cshtml" />
-    <Content Include="Views\Customer\Index.cshtml" />
-    <Content Include="Views\Customer\DisplayTemplates\Product.cshtml" />
-    <Content Include="Views\Customer\MyCart.cshtml" />
-    <Content Include="Views\Customer\AddToCart.cshtml" />
-    <Content Include="Views\Customer\EmptyCart.cshtml" />
-    <Content Include="Views\Customer\DisplayTemplates\CartProduct.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Cart\DisplayTemplates\Product.cshtml" />
+    <Content Include="Views\Cart\MyCart.cshtml" />
+    <Content Include="Views\Cart\AddToCart.cshtml" />
+    <Content Include="Views\Cart\EmptyCart.cshtml" />
+    <Content Include="Views\Cart\DisplayTemplates\CartProduct.cshtml" />
+    <Content Include="Views\Cart\Finalizepurchase.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

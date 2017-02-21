@@ -16,7 +16,7 @@
     <div class="col-md-3">
         <p>Total Products: @ViewData["productsCount"]</p>
         <p>Total Price: @ViewData["productsPrice"]</p>
-        <a href="">Finalize purchase</a>
+        @Html.ActionLink("Finalize purchase", "Finalizepurchase", "Cart", new {  }, new { @class = "" })
     </div>
 </div>
 
