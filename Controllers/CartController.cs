@@ -1,7 +1,5 @@
 ﻿namespace OnlineShop.Controllers
 {
-    using System;
-    using System.Data.Entity.Validation;
     using System.Linq;
     using System.Net;
     using System.Web.Mvc;

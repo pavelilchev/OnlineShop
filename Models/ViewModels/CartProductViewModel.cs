@@ -1,6 +1,5 @@
 ﻿namespace OnlineShop.Models.ViewModels
 {
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     public class CartProductViewModel

@@ -7,7 +7,7 @@
     using System.Web;
     using System.Web.Mvc;
 
-    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
+    [AttributeUsage(AttributeTargets.Property)]
     public class FileTypeAttribute : ValidationAttribute, IClientValidatable
     {
         private const string DefaultErrorMessage = "Only the following file types are allowed: {0}";
