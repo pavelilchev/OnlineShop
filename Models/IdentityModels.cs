@@ -28,9 +28,10 @@
                    .WithMany(s => s.Products);
 
             modelBuilder.Entity<CartProduct>()
-                 .HasRequired<Product>(s => s.Product);
-
-            base.OnModelCreating(modelBuilder);
+                 .HasRequired(s => s.Product)
+                 .WithMany();
+                 
+           base.OnModelCreating(modelBuilder);
         }
     }
 }
