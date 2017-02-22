@@ -1,0 +1,28 @@
+﻿@model OnlineShop.Models.CartProduct
+
+
+@using (Html.BeginForm("EditCart", "Cart", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="col-sm-4 single-product">
+        <img src="@($"data:image/gif;base64,{Convert.ToBase64String(Model.Product.Picture)}")" />
+        <p>@Model.Product.Name</p>
+        @Html.HiddenFor(model => model.Id)
+        <div class="form-group">
+            @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Quantity, new { @Value = Model.Product.Quantity })
+                <p class="error">currently in stock: @Model.Product.Quantity</p>
+            </div>
+        </div>
+
+        <p>Price: $@Model.Product.Price</p>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Update Cart" class="" />
+            </div>
+        </div>
+    </div>
+}

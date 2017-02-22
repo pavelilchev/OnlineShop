@@ -21,5 +21,16 @@
         {
             return new ApplicationDbContext();
         }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<CartProduct>()
+                   .HasRequired<Cart>(s => s.Cart)
+                   .WithMany(s => s.Products);
+
+            modelBuilder.Entity<CartProduct>()
+                 .HasRequired<Product>(s => s.Product);
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

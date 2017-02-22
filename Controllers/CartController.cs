@@ -1,5 +1,6 @@
 ﻿namespace OnlineShop.Controllers
 {
+    using System.Data.Entity;
     using System.Linq;
     using System.Net;
     using System.Web.Mvc;
@@ -11,7 +12,7 @@
     {
         public ActionResult Index()
         {
-            var products = this.Data.Products.ToList();
+            var products = this.Data.Products.Where(p => p.Quantity > 0).ToList();
 
             return this.View(products);
         }
@@ -91,7 +92,7 @@
         public ActionResult MyCart()
         {
             string currentUserId = this.User.Identity.GetUserId();
-            var cart = this.Data.Carts.FirstOrDefault(x => x.User.Id == currentUserId && x.IsActive);
+            var cart = this.Data.Carts.Include(c => c.Products).FirstOrDefault(x => x.User.Id == currentUserId && x.IsActive);
 
             if (cart == null || cart.Products.Count == 0)
             {
@@ -129,7 +130,7 @@
         public ActionResult Finalizepurchase()
         {
             string currentUserId = this.User.Identity.GetUserId();
-            Cart cart = this.Data.Carts.FirstOrDefault(x => x.User.Id == currentUserId && x.IsActive);
+            Cart cart = this.Data.Carts.Include(c => c.Products).FirstOrDefault(x => x.User.Id == currentUserId && x.IsActive);
             if (cart == null)
             {
                 return this.HttpNotFound();
@@ -139,7 +140,7 @@
             {
                 if (product.Quantity > product.Product.Quantity)
                 {
-                    return this.RedirectToAction("MyCart");
+                    return this.RedirectToAction("EditCart", new { cartId = cart.Id, cartProductId = product.Id });
                 }
 
                 product.Product.Quantity -= product.Quantity;
@@ -149,6 +150,42 @@
             this.Data.SaveChanges();
 
             return this.View();
+        }
+
+        [Authorize]
+        public ActionResult EditCart(int cartId, int cartProductId)
+        {
+            var cartProduct = this.Data.CartProducts.Find(cartProductId);
+            this.ViewData["quantity"] = cartProduct.Product.Quantity;
+
+            return this.View(cartProduct);
+        }
+
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditCart([Bind(Include = "Id,Quantity,")]CartProduct cartProduct)
+        {
+            int id = cartProduct.Id;
+            string currentUserId = this.User.Identity.GetUserId();
+            Cart cart = this.Data.Carts.FirstOrDefault(x => x.User.Id == currentUserId && x.IsActive);
+            if (cart == null)
+            {
+                return this.HttpNotFound();
+            }
+
+            int quantity = cartProduct.Quantity;
+            if (quantity > 0 || quantity <= cartProduct.Product.Quantity)
+            {
+                var cp = this.Data.CartProducts.Find(id);
+                cp.Quantity = quantity;
+                this.Data.SaveChanges();
+
+                return this.RedirectToAction("MyCart");
+            }
+
+            this.ViewData["quantity"] = cartProduct.Product.Quantity;
+            return this.View(cartProduct);
         }
     }
 }
